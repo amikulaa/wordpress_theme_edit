@@ -1,0 +1,43 @@
+======= OLD VERSION 1 =======
+    %section.themeteaser#themes
+      %div
+        %h2 Explore Our Themes
+        = "**Scientific activity at IMSI is organized around a set of themes** which have been chosen as focal points for sustained engagement over many years."|md
+        - for theme in allthemes
+          %a(href="/theme/#{theme.slug}" aria-label="Read more about #{theme.name}")
+            %figure
+              - set imgid = fn('get_field','image','post_tag_' ~ theme.term_id)
+              - if imgid|length < 5
+                - set img = fn('wp_get_attachment_url', imgid)
+              - else
+                - set img = imgid
+              %img(src="#{img}" alt="#{theme.name}")
+              %figcaption
+                %h3.h5 = theme.name
+                %div(tabindex="0")
+                  = fn('wpautop', theme.description)
+
+
+======= NEW CURRENT VERSION =======
+%section.themeteaser#themes
+      %div.grid-container
+        %h2 Explore Our Themes
+        .grid
+          - for theme in allthemes
+            - if theme.slug != 'VALUE HIDDEN FOR SECURITY'
+              .card
+                %a.card-inner(href="/theme/#{theme.slug}" aria-label="Read more about #{theme.name}")
+                  .card-front
+                    - set imgid = fn('get_field','image','post_tag_' ~ theme.term_id)
+                    - if imgid|length < 5
+                      - set img = fn('wp_get_attachment_url', imgid)
+                    - else
+                      - set img = imgid
+                    %img.card-image(src="#{img}" alt="#{theme.name}")
+                    .overlay
+                      %h3.h5 = theme.name
+                  .card-back
+                    %div.description= fn('wpautop', theme.description)
+                    %p.clickmeformore Click to learn more
+        %p.infosmall Scientific activity at IMSI is organized around a set of themes which have been chosen as focal points for sustained engagement over many years.
+        %a.formatlink(href="/themes") Learn more
